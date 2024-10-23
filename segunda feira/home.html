@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Matemática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Matemática</h1>
+
+    <div id="question1" class="question-container">
+        <p>Qual é a soma de 5 + 7?</p>
+        <button onclick="checkAnswer(1, '12')">10</button>
+        <button onclick="checkAnswer(1, '12')">12</button>
+        <button onclick="checkAnswer(1, '12')">15</button>
+        <button onclick="checkAnswer(1, '12')">20</button>
+    </div>
+
+    <div id="question2" class="question-container hidden">
+        <p>Qual é o produto de 4 * 6?</p>
+        <button onclick="checkAnswer(2, '24')">20</button>
+        <button onclick="checkAnswer(2, '24')">24</button>
+        <button onclick="checkAnswer(2, '24')">28</button>
+        <button onclick="checkAnswer(2, '24')">30</button>
+    </div>
+
+    <div id="result" class="hidden">
+        <p id="score"></p>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+
+        function checkAnswer(questionNumber, correctAnswer) {
+            const selectedAnswer = event.target.textContent;
+            if (selectedAnswer === correctAnswer) {
+                alert("Resposta correta!");
+                correctAnswers++;
+            } else {
+                alert("Resposta incorreta! A resposta correta era: " + correctAnswer);
+            }
+            showNextQuestion(questionNumber);
+        }
+
+        function showNextQuestion(questionNumber) {
+            if (questionNumber === 1) {
+                document.getElementById('question1').classList.add('hidden');
+                document.getElementById('question2').classList.remove('hidden');
+            } else if (questionNumber === 2) {
+                document.getElementById('question2').classList.add('hidden');
+                document.getElementById('result').classList.remove('hidden');
+                document.getElementById('score').textContent = "Você acertou " + correctAnswers + " de 2 perguntas.";
+            }
+        }
+    </script>
+</body>
+</html>
